@@ -46,7 +46,7 @@ error registration_user(User **accounts, size_t *size, size_t *capacity, User us
 
 error get_accounts(User **accounts, size_t *size, size_t *capacity);
 
-error check_input_data(User *accounts, char *password_str);
+error check_input_data(User *accounts, const char *password_str);
 
 error search_account(const User *accounts, size_t size, User *user_data);
 
@@ -210,7 +210,7 @@ int main() {
                 error_code = howmuch_command(date_str, flag_time, &result);
 
                 if (error_code == -1) {
-                    printf("Invalid date format. Use YYYY-MM-DD\n");
+                    printf("Invalid date format. Use DD-MM-YYYY\n");
                 } else if (error_code == -2) {
                     printf("Invalid date.\n");
                 } else if (error_code == -3) {
@@ -223,6 +223,7 @@ int main() {
                     printf("Elapsed time: %.2f\n", result);
                 }
                 --user_sanctions;
+
             } else if (strcmp(command_ask, "sanctions") == 0) {
                 if (scanf("%s %d", username, &limit) != 2) {
                     printf("Invalid input. Try again\n");
@@ -270,7 +271,7 @@ void p_menu() {
     printf("Please enter a command from this list:\n");
     printf("1) 'time'\n");
     printf("2) 'date'\n");
-    printf("3) 'howmuch' <YYYY-MM-DD> 'flag' {{'Use -s, -m, -h, -y}}\n");
+    printf("3) 'howmuch' <DD-MM-YYYY> 'flag' {{'Use -s, -m, -h, -y}}\n");
     printf("4) 'sanctions' <username> <count>\n");
     printf("5) 'logout'\n");
     printf("================================================================\n");
@@ -438,15 +439,11 @@ error string_to_uint(const char *str, unsigned int *res, int base) {
         return INPUT_ERROR;
     }
 
-    if (*res < 0 || *res > 100000) {
-        return INPUT_ERROR;
-    }
-
     return OK;
 }
 
 
-error check_input_data(User *accounts, char *password_str) {
+error check_input_data(User *accounts, const char *password_str) {
     if (check_correct_login(accounts->login) != OK) {
         return INPUT_ERROR;
     }
@@ -552,14 +549,14 @@ error registration_user(User **accounts, size_t *size, size_t *capacity, const U
 
 
 void time_command() {
-    time_t time_value = time(NULL);
-    struct tm tm = *localtime(&time_value);
+    const time_t time_value = time(NULL);
+    const struct tm tm = *localtime(&time_value);
     printf("Current time: %02d:%02d:%02d\n", tm.tm_hour, tm.tm_min, tm.tm_sec);
 }
 
 void date_command() {
-    time_t time_value = time(NULL);
-    struct tm tm = *localtime(&time_value);
+    const time_t time_value = time(NULL);
+    const struct tm tm = *localtime(&time_value);
     printf("Current date: %04d-%02d-%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);
 }
 
@@ -611,7 +608,7 @@ int howmuch_command(const char *date_str, const char *flag, double *result) {
     double seconds_diff;
 
     // Парсим дату из строки
-    if (sscanf(date_str, "%d-%d-%d", &input_time.tm_year, &input_time.tm_mon, &input_time.tm_mday) != 3) {
+    if (sscanf(date_str, "%d-%d-%d", &input_time.tm_mday, &input_time.tm_mon, &input_time.tm_year) != 3) {
         return -1; // Ошибка формата даты
     }
 
