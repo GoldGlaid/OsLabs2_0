@@ -129,6 +129,19 @@ task1_1/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/task1_1.dir/build.make CMakeFiles/task1_1.dir/build
 .PHONY : task1_1/fast
 
+#=============================================================================
+# Target rules for targets named task1_7
+
+# Build rule for target.
+task1_7: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 task1_7
+.PHONY : task1_7
+
+# fast build rule for target.
+task1_7/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/task1_7.dir/build.make CMakeFiles/task1_7.dir/build
+.PHONY : task1_7/fast
+
 lab1/task1/task1_1.o: lab1/task1/task1_1.c.o
 .PHONY : lab1/task1/task1_1.o
 
@@ -153,6 +166,30 @@ lab1/task1/task1_1.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/task1_1.dir/build.make CMakeFiles/task1_1.dir/lab1/task1/task1_1.c.s
 .PHONY : lab1/task1/task1_1.c.s
 
+lab1/task7/task1_7.o: lab1/task7/task1_7.c.o
+.PHONY : lab1/task7/task1_7.o
+
+# target to build an object file
+lab1/task7/task1_7.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/task1_7.dir/build.make CMakeFiles/task1_7.dir/lab1/task7/task1_7.c.o
+.PHONY : lab1/task7/task1_7.c.o
+
+lab1/task7/task1_7.i: lab1/task7/task1_7.c.i
+.PHONY : lab1/task7/task1_7.i
+
+# target to preprocess a source file
+lab1/task7/task1_7.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/task1_7.dir/build.make CMakeFiles/task1_7.dir/lab1/task7/task1_7.c.i
+.PHONY : lab1/task7/task1_7.c.i
+
+lab1/task7/task1_7.s: lab1/task7/task1_7.c.s
+.PHONY : lab1/task7/task1_7.s
+
+# target to generate assembly for a file
+lab1/task7/task1_7.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/task1_7.dir/build.make CMakeFiles/task1_7.dir/lab1/task7/task1_7.c.s
+.PHONY : lab1/task7/task1_7.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,9 +199,13 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... task1_1"
+	@echo "... task1_7"
 	@echo "... lab1/task1/task1_1.o"
 	@echo "... lab1/task1/task1_1.i"
 	@echo "... lab1/task1/task1_1.s"
+	@echo "... lab1/task7/task1_7.o"
+	@echo "... lab1/task7/task1_7.i"
+	@echo "... lab1/task7/task1_7.s"
 .PHONY : help
 
 
